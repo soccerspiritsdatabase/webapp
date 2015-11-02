@@ -1,0 +1,69 @@
+<div id="character-details" ng-if="ctrl.character">
+	<h1 class="ui header">{{ctrl.character.name.en}}</h1>
+	
+	<div class="ui stackable grid">
+		<div class="seven wide column">
+			<character-card ng-model="ctrl.character"></character-card>
+			<div class="ui divider"></div>
+			
+			<div class="ui labels">
+				<span class="ui image label">
+					<img ng-src="{{ctrl.imageIcons.gender}}">
+					{{ctrl.character.gender}}
+				</span>
+				<span class="ui image label">
+					<img ng-src="{{ctrl.imageIcons.element}}">
+					{{ctrl.character.element}}
+				</span>
+				<span ng-show="ctrl.character.type" class="ui image label">
+					<img ng-src="{{ctrl.imageIcons.type}}">
+					{{ctrl.character.type}}
+				</span>
+				<span ng-show="ctrl.character.weatherImmunity" class="ui image label">
+					<img ng-src="{{ctrl.imageIcons.weatherImmunity}}">
+					{{ctrl.character.weatherImmunity}}
+				</span>
+				<span class="ui label">
+					<i class="star icon"></i>
+					{{ctrl.character.value}}
+				</span>
+				<span ng-show="ctrl.character.isSpecial" class="ui image label">
+					<img ng-src="{{ctrl.imageIcons.special}}">
+					Special
+				</span>
+				<div class="ui divider"></div>
+			</div>
+			
+			<div ng-if="ctrl.character.stoneElements.length > 0">
+				<h4 class="ui header">Spirit Stones</h4>
+				<div class="ui labels">
+					<span ng-repeat="element in ctrl.character.stoneElements track by $index" class="ui image label">
+						<img ng-src="{{ctrl.imageIcons.stoneElements[$index]}}">
+						{{element}}
+					</span>
+				</div>
+				<div class="ui divider"></div>
+			</div>
+		</div>
+		
+		<div class="nine wide column">
+			<h4 class="ui header">Story</h4>
+			<p>{{ctrl.character.story.en}}</p>
+			
+			<div class="ui secondary pointing four item menu">
+				<a ng-repeat="(key, tab) in ctrl.tabs"
+					ng-click="tab.select()"
+					class="item"
+					ng-class="{ active: tab.isSelected() }">
+					{{tab.name}}
+				</a>
+			</div>
+			
+			<character-stats-tab ng-if="ctrl.selectedTab.stats" ng-model="ctrl.character"></character-stats-tab>
+			<character-skills-tab ng-if="ctrl.selectedTab.skills" ng-model="ctrl.character"></character-skills-tab>
+			<character-evolution-tab ng-if="ctrl.selectedTab.evolution" ng-model="ctrl.character"></character-evolution-tab>
+			<character-chains-tab ng-if="ctrl.selectedTab.chains" ng-model="ctrl.character"></character-chains-tab>
+			
+		</div>
+	</div>
+</div>

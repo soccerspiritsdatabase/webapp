@@ -1,0 +1,16 @@
+<h5 ng-if="skill.name" class="ui header">[{{skill.type}}] {{skill.name.en}}</h5>
+<p ng-show="skill.effects.length > 1" class="ui labels">
+	<a ng-repeat="effect in skill.effects track by $index"
+		ng-click="$parent.levelIndex = $index"
+		class="ui small grey label"
+		ng-class="{ basic: $parent.levelIndex !== $index }">
+		{{effect.level}}
+	</a>
+</p>
+<p>
+	{{skill.effects[levelIndex].description.en}}
+</p>
+<div ng-if="skill.cost > 0 || cooldown.value > 0" class="ui labels">
+	<span ng-show="skill.cost > 0" class="ui blue label"><i class="lightning icon"></i> {{skill.cost}}</span>
+	<span ng-show="cooldown.value > 0" class="ui orange label"><i class="wait icon"></i> {{cooldown.value}} {{cooldown.unit}}</span>
+</div>

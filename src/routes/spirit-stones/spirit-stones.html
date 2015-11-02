@@ -1,0 +1,45 @@
+<h1 class="ui header">Spirit Stones</h1>
+<h3 class="ui header">Name</h3>
+<div class="ui fluid input">
+	<input ng-model="ctrl.filterValues.name" ng-model-options="{ debounce: 500 }" type="text">
+</div>
+<br>
+
+<div class="ui stackable two column grid">
+	<div ng-repeat="(key, filter) in ctrl.filters" class="column">
+		<h3 class="ui header">
+			{{filter.name}}
+		</h3>
+		<multi-select ng-model="ctrl.filterValues[key]" options="filter.options"></multi-select>
+	</div>
+	
+	<div class="column">
+		<h3 class="ui header">Skill</h3>
+		<div class="ui fluid input">
+			<input ng-model="ctrl.filterValues.skill" ng-model-options="{ debounce: 500 }" type="text">
+		</div>
+	</div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui stackable doubling three column grid">
+	<div ng-repeat="stone in ctrl.spiritStones" class="column">
+		<div class="ui segment">
+			<div class="ui grid">
+				<div class="four wide column">
+					<div class="stackable images">
+						<img ng-src="{{stone.iconImage}}">
+						<img ng-show="stone.zodiacImage" ng-src="{{stone.zodiacImage}}">
+					</div>
+				</div>
+				<div class="twelve wide column">
+					<h5 class="ui header">{{stone.name.en}}</h5>
+					<div ng-repeat="skill in stone.skills">
+						<character-skill ng-model="skill"></character-skill>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+.ui.image.label {
+	margin-bottom: .5em;
+}
+
+.stackable.images {
+	position: relative;
+	
+	> img {
+		max-width: 100%;
+	}
+	
+	> img:not(:first-child) {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}

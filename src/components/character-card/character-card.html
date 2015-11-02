@@ -1,0 +1,11 @@
+<div class="stackable images">
+	<img ng-src="{{image.background}}">
+	<img ng-src="{{image.character}}">
+	<img ng-src="{{image.border}}">
+</div>
+<div class="content">
+	<div class="stars">
+		<img ng-repeat="star in stars" ng-src="{{image.star}}">
+	</div>
+	<div class="name" ng-style="{'font-size': fontSize}">{{character.name.en}}</div>
+</div>

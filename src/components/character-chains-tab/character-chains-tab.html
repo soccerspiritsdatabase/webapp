@@ -1,0 +1,15 @@
+<div ng-show="!chains">
+	This character has no chains.
+</div>
+
+<div ng-repeat="chain in chains">
+	<div class="chain-wrapper">
+		<h5 class="ui header">{{chain.effect}}</h5>
+		<div ng-repeat="characterId in chain.characterIds" class="card-wrapper">
+			<a ui-sref="character-details({ characterId: characterId })">
+				<character-card ng-model="characterId" class="ui link"></character-card>
+			</a>
+		</div>
+	</div>
+	<div class="ui divider"></div>
+</div>

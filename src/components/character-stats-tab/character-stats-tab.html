@@ -1,0 +1,72 @@
+<div ng-show="character.isManager">
+	Managers don't have stats.
+</div>
+
+<div ng-if="character.isPlayer || character.isOther">
+	<div ng-show="character.isPlayer">
+		<strong>Level</strong>
+		<div class="ui small labels">
+			<a ng-repeat="level in statOptionValues.level"
+				ng-click="statOptions.level = level"
+				class="ui teal label"
+				ng-class="{ basic: statOptions.level !== level }">{{level}}</a>
+		</div>
+		
+		<strong>Superb</strong>
+		<div class="ui small labels">
+			<a ng-repeat="superb in statOptionValues.superb"
+				ng-click="statOptions.superb = superb"
+				class="ui orange label"
+				ng-class="{ basic: statOptions.superb !== superb }">{{superb}}</a>
+		</div>
+		<div class="ui divider"></div>
+	</div>
+	
+	<div ng-repeat="(key, stat) in stats">
+		<div class="stat-meta">
+			<span class="ui small {{stat.color}} basic label">{{stat.name}}: {{stat.value}}</span>
+			<div class="ui mini labeled input">
+				<div class="ui {{stat.color}} left corner label">
+					<i class="plus icon"></i>
+				</div>
+				<input ng-model="statOptions.bonus[key]" type="number" maxlength="2">
+			</div>
+		</div>
+		<div class="ui tiny {{stat.color}} progress">
+			<div class="bar" style="transition-duration: 300ms; width: {{stat.value / 3.5}}%;"></div>
+		</div>
+	</div>
+	<div class="ui divider"></div>
+	
+	<table class="ui very basic small unstackable compact table secondary-stats">
+		<tbody>
+			<tr ng-repeat="row in secondaryStats">
+				<td ng-repeat-start="stat in row" class="six wide"><strong>{{stat.name}}</strong></td>
+				<td ng-repeat-end class="two wide">
+					<span class="ui basic small label"
+						ng-class="{ blue: stat.positionBuff }">
+						{{stat.value}}
+					</span>
+				</td>
+				<td ng-if="row.length === 1" colspan="2"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="ui segment positions">
+		<div class="ui three column center aligned grid">
+			<div ng-repeat="row in positions track by $index" class="row">
+				<div ng-repeat="position in row track by $index" class="column">
+					<span ng-show="!position" class="ui circular label"></span>
+					<a ng-show="position"
+						ng-click="statOptions.position = (statOptions.position === position) ? null : position"
+						class="ui medium label"
+						ng-class="{ basic: statOptions.position !== position , orange: position.main, yellow: !position.main }">
+						{{position.name}}
+						<i ng-show="statOptions.position === position" class="delete icon"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

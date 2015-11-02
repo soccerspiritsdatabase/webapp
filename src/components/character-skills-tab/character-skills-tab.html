@@ -1,0 +1,13 @@
+<div ng-if="character.skills.ace" class="ui segment">
+	<character-skill ng-model="character.skills.ace"></character-skill>
+</div>
+
+<div ng-if="character.skills.active" class="ui segment">
+	<character-skill ng-model="character.skills.active"></character-skill>
+</div>
+
+<div ng-if="character.skills.passives.length > 0" class="ui segments">
+	<div ng-repeat="skill in character.skills.passives" class="ui segment">
+		<character-skill ng-model="skill"></character-skill>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="ui labels">
+	<a ng-repeat="option in options"
+		ng-click="selectOption(option)"
+		class="ui label" ng-class="{ image: option.image, black: isOptionSelected(option) }">
+		<img ng-if="option.image" ng-src="{{option.image}}">
+		<i ng-if="option.icon" class="{{option.icon}} icon"></i>
+		<span ng-show="option.value === true">Yes</span>
+		<span ng-show="option.value === false">No</span>
+		<span ng-show="option.value !== true && option.value !== false">{{option.value}}</span>
+	</a>
+</div>

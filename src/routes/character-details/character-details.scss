@@ -1,0 +1,25 @@
+#character-details {
+	
+	.stat-meta {
+		margin-bottom: .2em;
+		
+		.ui.input {
+			float: right;
+			width: 7em;
+			
+			input {
+				text-align: center;
+			}
+		}
+		
+		&:after {
+			clear: both;
+			content: ' ';
+			display: block;
+		}
+	}
+	
+	.ui.progress .bar {
+		max-width: 100%;
+	}
+}

@@ -1,0 +1,69 @@
+<h1 class="ui header">Characters</h1>
+<h3 class="ui header">Name</h3>
+<div class="ui fluid action input" ng-class="{ icon: ctrl.filterValues.name }">
+	<input ng-model="ctrl.filterValues.name" ng-model-options="{ debounce: 500 }" type="text">
+  <button ng-click="advancedSearch = !advancedSearch" class="ui right labeled icon button">
+		<i class="angle icon" ng-class="{ down: !advancedSearch, up: advancedSearch }"></i>
+		<span ng-hide="advancedSearch">Show Filters</span>
+		<span ng-show="advancedSearch">Hide Filters</span>
+  </button>
+</div>
+<br>
+
+<div ng-show="!advancedSearch" class="ui labels">
+	<span ng-repeat="(key, filter) in ctrl.filters"
+		ng-show="ctrl.filterValues[key]"
+		class="ui label">
+		{{filter.name}}: {{ctrl.filterValues[key]}}
+		<i class="delete icon" ng-show="!filter.required" ng-click="ctrl.filterValues[key] = undefined"></i>
+	</span>
+	
+	<span ng-repeat="(key, filter) in ctrl.skillFilters"
+		ng-show="ctrl.filterValues.skill[key]"
+		class="ui label">
+		{{filter.name}}: "{{ctrl.filterValues.skill[key]}}"
+		<i class="delete icon" ng-click="ctrl.filterValues.skill[key] = undefined"></i>
+	</span>
+</div>
+
+<div ng-show="advancedSearch" class="ui stackable two column grid">
+	<div ng-repeat="(key, filter) in ctrl.filters" class="column">
+		<h3 class="ui header">
+			{{filter.name}}
+			<span ng-show="filter.required" class="ui tiny basic red label">Required</span>
+		</h3>
+		<multi-select ng-model="ctrl.filterValues[key]" options="filter.options" multiple="filter.multiple" required="filter.required"></multi-select>
+	</div>
+</div>
+
+<div ng-show="advancedSearch" class="ui stackable two column grid">
+	<div ng-repeat="(key, filter) in ctrl.skillFilters" class="column">
+		<h3 class="ui header">{{filter.name}}</h3>
+		<div class="ui fluid input">
+			<input ng-model="ctrl.filterValues.skill[key]" ng-model-options="{ debounce: 500 }" type="text">
+		</div>
+	</div>
+</div>
+
+<div class="ui stackable two column grid">
+	<div class="column">
+	</div>
+	<div class="tablet computer only right aligned column">
+		<span class="ui right pointing label">Limit results to:</span>
+		<div class="ui small buttons">
+			<button ng-repeat="limit in ctrl.pageLimits"
+				ng-click="ctrl.pageLimit = limit"
+				class="ui teal button" ng-class="{ basic: ctrl.pageLimit != limit }">{{limit}}</button>
+		</div>
+	</div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui five column doubling grid">
+	<div ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimit" class="column">
+		<a ui-sref="character-details({ characterId: character.id })">
+			<character-card ng-model="character" class="ui link"></character-card>
+		</a>
+	</div>
+</div>
