@@ -19,9 +19,11 @@
   
   <body ng-app="app">
     <div class="ui labeled icon inverted secondary pointing blue menu">
-      <a class="item" ui-sref="characters" ui-sref-active="active"><i class="user icon"></i> Characters</a>
-      <a class="item" ui-sref="spirit-stones" ui-sref-active="active"><i class="diamond icon"></i> Spirit Stones</a>
-      <a class="item" ui-sref="rankings" ui-sref-active="active"><i class="ordered list icon"></i> Rankings</a>
+      <div class="ui container">
+        <a class="item" ui-sref="characters" ui-sref-active="active"><i class="user icon"></i> Characters</a>
+        <a class="item" ui-sref="spirit-stones" ui-sref-active="active"><i class="diamond icon"></i> Spirit Stones</a>
+        <a class="item" ui-sref="rankings" ui-sref-active="active"><i class="ordered list icon"></i> Rankings</a>
+      </div>
     </div>
     
     <div ui-view class="ui container"></div>
