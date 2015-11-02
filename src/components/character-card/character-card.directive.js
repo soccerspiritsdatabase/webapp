@@ -22,25 +22,9 @@ angular.module('app')
 				scope.character = character;
 				
 				scope.image = {};
-				scope.image.background = 'img/cards/background/';
-				scope.image.character = 'data/card_files/' + scope.character.imageId + '_CS.png';
-				scope.image.border = 'img/cards/border/';
+				scope.image.character = 'data/card_files/' + scope.character.imageId + '_CS.jpg';
 				scope.image.star = 'img/icons/star/';
 			
-				if (scope.character.isManager) {
-					scope.image.background += 'manager';
-					scope.image.border += 'manager';
-				} else {
-					scope.image.background += scope.character.element;
-					scope.image.border += scope.character.element;
-				}
-				if (scope.character.value >= 5) {
-					scope.image.background += '_shiny';
-					if (scope.character.isManager) {
-						scope.image.border += '_shiny';
-					}
-				}
-				
 				var evolutionNumber = Math.floor(scope.character.id / 10000) % 3;
 				if (character.isOther || evolutionNumber === 1) {
 					scope.image.star += 'normal';
@@ -49,8 +33,6 @@ angular.module('app')
 				} else {
 					scope.image.star += 'extreme-evolved';
 				}
-				scope.image.background += '.png';
-				scope.image.border += '.png';
 				scope.image.star += '.png';
 			
 				scope.stars = [];
