@@ -9,8 +9,6 @@ angular.module('app')
 		charactersById = data;
 		characters = Object.keys(charactersById).map(function (key) {
 			return charactersById[key];
-		}).filter(function (character) {
-			return character.value > 1;
 		})
 		.sort(function (a, b) {
 			// by name
