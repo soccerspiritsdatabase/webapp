@@ -14,7 +14,7 @@
 	<span ng-repeat="(key, filter) in ctrl.filters"
 		ng-show="ctrl.filterValues[key]"
 		class="ui label">
-		{{filter.name}}: {{ctrl.filterValues[key]}}
+		{{filter.name}}: {{ctrl.formatValue(ctrl.filterValues[key])}}
 		<i class="delete icon" ng-show="!filter.required" ng-click="ctrl.filterValues[key] = undefined"></i>
 	</span>
 	

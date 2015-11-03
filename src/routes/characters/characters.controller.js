@@ -7,6 +7,13 @@ angular.module('app')
     ctrl.filterValues = {};
   }
   
+  ctrl.formatValue = function (value) {
+    if (Array.isArray(value)) {
+      return value.join(', ');
+    }
+    return value;
+  };
+  
   var filterTemplates = {
     'boolean': {
       options: [
@@ -38,7 +45,8 @@ angular.module('app')
   };
   
   ctrl.filters.element = angular.merge({}, filterTemplates.element, {
-    name: 'Element'
+    name: 'Element',
+    multiple: true
   });
   
   ctrl.filters.value = {
@@ -49,7 +57,8 @@ angular.module('app')
       { value: 4, icon: 'star' },
       { value: 5, icon: 'star' },
       { value: 6, icon: 'star' },
-    ]
+    ],
+    multiple: true
   };
   
   ctrl.filters.gender = {
@@ -72,7 +81,8 @@ angular.module('app')
       { value: 'Defender', image: ImageIcons.get('type', 'defender') },
       { value: 'Assist', image: ImageIcons.get('type', 'assist') },
       { value: 'Leader', image: ImageIcons.get('type', 'leader') }
-    ]
+    ],
+    multiple: true
   };
   
   ctrl.filters.stoneElements = angular.merge({}, filterTemplates.element, {
@@ -86,7 +96,8 @@ angular.module('app')
       { value: 'Rainy Weather', image: ImageIcons.get('weather', 'rainy weather') },
       { value: 'Soul Grave', image: ImageIcons.get('weather', 'soul grave') },
       { value: 'Piercing Wind', image: ImageIcons.get('weather', 'piercing wind') }
-    ]
+    ],
+    multiple: true
   }
   
   ctrl.filters.season = {

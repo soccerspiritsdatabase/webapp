@@ -51,7 +51,9 @@ angular.module('app')
 						if (filter[filterName].length === 0) {
 							return true;
 						}
-						return filter[filterName].every(function (filterValue) {
+						
+						var setMethod = (filterName === 'stoneElements') ? 'every' : 'some';
+						return filter[filterName][setMethod](function (filterValue) {
 							if (Array.isArray(character[filterName])) {
 								return character[filterName].some(function (characterValue) {
 									return characterValue == filterValue;
