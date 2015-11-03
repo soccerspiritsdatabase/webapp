@@ -19,6 +19,14 @@
 				class="ui orange label"
 				ng-class="{ basic: statOptions.superb !== superb }">{{superb}}</a>
 		</div>
+		
+		<strong>Bonus Stats</strong>
+		<div class="ui small labels">
+			<a ng-repeat="bonusStat in [0, 30]"
+				ng-click="setBonusStats(bonusStat)"
+				class="ui purple label"
+				ng-class="{ basic: getBonusStats() !== bonusStat }">+ {{bonusStat}}</a>
+		</div>
 		<div class="ui divider"></div>
 	</div>
 	

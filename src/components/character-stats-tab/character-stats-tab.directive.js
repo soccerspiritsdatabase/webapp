@@ -29,6 +29,19 @@ angular.module('app')
 					}
 				};
 				
+				scope.setBonusStats = function (bonusStat) {
+					Object.keys(scope.statOptions.bonus).forEach(function (statName) {
+						scope.statOptions.bonus[statName] = bonusStat;
+					});
+				};
+				
+				scope.getBonusStats = function () {
+					var statNames = Object.keys(scope.statOptions.bonus);
+					return statNames.reduce(function (prev, statName) {
+						return prev + scope.statOptions.bonus[statName]
+					}, 0) / statNames.length;
+				};
+				
 				scope.positions = [ 
 					[['LWF'], ['ST', 'SS'], ['RWF']],
 					[['LM', 'LWM'], ['CM', 'CDM', 'CAM'], ['RM', 'RWM']],
