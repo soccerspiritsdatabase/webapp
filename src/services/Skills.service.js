@@ -1,5 +1,5 @@
 angular.module('app')
-.service('Skills', function ($http, $q, TimeLogger) {
+.service('Skills', function ($http, $q) {
 	var service = this;
 	
 	var skillsById, skills;
@@ -31,9 +31,13 @@ angular.module('app')
 		
 		if (filter.description) {
 			try {
-				var descriptionRegex = new RegExp(filter.description.split(/\s+/).join('.+'), 'i');
+				var regexArr = filter.description.split(/\s+/).map(function (str) {
+					return new RegExp(str, 'i');
+				});
 				filters.push(function (skill) {
-					return skill.description.en.match(descriptionRegex);
+					return regexArr.every(function (regex) {
+						return skill.description.en.match(regex);
+					});
 				});	
 			} catch (e) {}
 		}
