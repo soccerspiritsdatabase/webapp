@@ -46,33 +46,39 @@
 	</div>
 	<div class="ui divider"></div>
 	
-	<table class="ui very basic small unstackable compact table secondary-stats">
-		<tbody>
-			<tr ng-repeat="row in secondaryStats">
-				<td ng-repeat-start="stat in row" class="six wide"><strong>{{stat.name}}</strong></td>
-				<td ng-repeat-end class="two wide">
-					<span class="ui basic small label"
-						ng-class="{ blue: stat.positionBuff }">
-						{{stat.value}}
-					</span>
-				</td>
-				<td ng-if="row.length === 1" colspan="2"></td>
-			</tr>
-		</tbody>
-	</table>
-	
-	<div class="ui segment positions">
-		<div class="ui three column center aligned grid">
-			<div ng-repeat="row in positions track by $index" class="row">
-				<div ng-repeat="position in row track by $index" class="column">
-					<span ng-show="!position" class="ui circular label"></span>
-					<a ng-show="position"
-						ng-click="statOptions.position = (statOptions.position === position) ? null : position"
-						class="ui medium label"
-						ng-class="{ basic: statOptions.position !== position , orange: position.main, yellow: !position.main }">
-						{{position.name}}
-						<i ng-show="statOptions.position === position" class="delete icon"></i>
-					</a>
+	<div class="ui grid">
+		<div class="sixteen wide tablet eight wide computer column">
+			<table class="ui very basic small unstackable compact table secondary-stats">
+				<tbody>
+					<tr ng-repeat="row in secondaryStats">
+						<td ng-repeat-start="stat in row" class="six wide"><strong>{{stat.name}}</strong></td>
+						<td ng-repeat-end class="two wide">
+							<span class="ui basic small label"
+								ng-class="{ blue: stat.positionBuff }">
+								{{stat.value}}
+							</span>
+						</td>
+						<td ng-if="row.length === 1" colspan="2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="sixteen wide tablet eight wide computer column">
+			<div class="ui segment positions">
+				<div class="ui three column center aligned grid">
+					<div ng-repeat="row in positions track by $index" class="row">
+						<div ng-repeat="position in row track by $index" class="column">
+							<span ng-show="!position" class="ui circular label"></span>
+							<a ng-show="position"
+								ng-click="statOptions.position = (statOptions.position === position) ? null : position"
+								class="ui medium label"
+								ng-class="{ basic: statOptions.position !== position , orange: position.main, yellow: !position.main }">
+								{{position.name}}
+								<i ng-show="statOptions.position === position" class="delete icon"></i>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
