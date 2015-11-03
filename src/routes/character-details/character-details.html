@@ -1,8 +1,8 @@
 <div id="character-details" ng-if="ctrl.character">
 	<h1 class="ui header">{{ctrl.character.name.en}}</h1>
 	
-	<div class="ui stackable grid">
-		<div class="seven wide column">
+	<div class="ui stackable two column grid">
+		<div class="six wide tablet five wide computer column">
 			<character-card ng-model="ctrl.character"></character-card>
 			<div class="ui divider"></div>
 			
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		
-		<div class="nine wide column">
+		<div class="ten wide tablet eleven wide computer column">
 			<h4 class="ui header">Story</h4>
 			<p>{{ctrl.character.story.en}}</p>
 			
