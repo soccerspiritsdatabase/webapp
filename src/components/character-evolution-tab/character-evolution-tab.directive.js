@@ -10,15 +10,39 @@ angular.module('app')
 			scope.$watch('character', function (character) {
 				if (!character) return;
 				
-				$q.all([
-					Evolutions.reverse(character.id),
-					Evolutions.get(character.evolution)
-				])
-				.then(function (result) {
-					scope.prevEvolution = result[0];
-					scope.evolution = result[1];
+				getFirstEvolution(character.id)
+				.then(function (id) {
+					return getNextEvolutions(id);
+				})
+				.then(function (evolutions) {
+					scope.evolutions = evolutions;
 				});
 			});
 		}
 	};
+	
+	function getFirstEvolution (id) {
+		return Evolutions.reverse(id)
+		.then(function (preEvolution) {
+			if (preEvolution) {
+				return getFirstEvolution(preEvolution.preResult);
+			} else {
+				return id;
+			}
+		});
+	}
+	
+	function getNextEvolutions (id, result) {
+		if (!result) result = [];
+		
+		return Evolutions.get(id)
+		.then(function (evolution) {
+			if (evolution) {
+				result.push(evolution);
+				return getNextEvolutions(evolution.result, result);
+			} else {
+				return result;
+			}
+		});
+	}
 });

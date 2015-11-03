@@ -1,27 +1,24 @@
-<div ng-show="!prevEvolution && !evolution">
-	This character has no evolution.
-</div>
-<div ng-if="prevEvolution || evolution" class="ui doubling three column grid">
-	<div ng-if="prevEvolution" class="column">
-		<a ui-sref="character-details({ characterId: prevEvolution.preResult })">
-			<character-card ng-model="prevEvolution.preResult" class="ui link"></character-card>
+<div class="ui two column grid">
+	<div class="eight wide tablet six wide computer column">
+		<a ui-sref="character-details({ characterId: evolutions[0].preResult })">
+			<character-card ng-model="evolutions[0].preResult" class="ui link"></character-card>
 		</a>
 	</div>
-	<div ng-if="prevEvolution" class="mobile tablet only column"></div>
-	
-	<div ng-if="evolution" class="column">
-		<a ui-sref="character-details({ characterId: evolution.result })">
-			<character-card ng-model="evolution.result" class="ui link"></character-card>
-		</a>
-	</div>
-	<div ng-if="evolution" class="column">
-		<h5 class="ui header">Materials</h5>
-		<div ng-repeat="material in evolution.materials">
-			x{{material.count}}
-			<a ui-sref="character-details({ characterId: material.character.id })">{{material.character.name.en}}</a>
+	<div ng-repeat="evolution in evolutions" class="column row">
+		<div class="eight wide tablet six wide computer column">
+			<a ui-sref="character-details({ characterId: evolution.result })">
+				<character-card ng-model="evolution.result" class="ui link"></character-card>
+			</a>
 		</div>
-		<div>
-			{{evolution.cost}} Gold
+		<div class="column">
+			<h5 class="ui header">Materials</h5>
+			<div ng-repeat="material in evolution.materials">
+				x{{material.count}}
+				<a ui-sref="character-details({ characterId: material.character.id })">{{material.character.name.en}}</a>
+			</div>
+			<div>
+				{{evolution.cost}} Gold
+			</div>
 		</div>
 	</div>
 </div>

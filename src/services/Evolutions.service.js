@@ -12,9 +12,14 @@ angular.module('app')
 		});
 	});
 	
-	service.get = function (id) {
+	service.get = function (characterId) {
 		return promise.then(function () {
-			return processMaterials(angular.copy(evolutionsById[id]));
+			for (var i = 0; i < evolutions.length; i++) {
+				if (evolutions[i].preResult === characterId) {
+					return processMaterials(angular.copy(evolutions[i]));
+				}
+			}
+			return null;
 		});
 	};
 	
@@ -22,7 +27,6 @@ angular.module('app')
 		return promise.then(function () {
 			for (var i = 0; i < evolutions.length; i++) {
 				if (evolutions[i].result === characterId) {
-					console.log(evolutions[i]);
 					return processMaterials(angular.copy(evolutions[i]));
 				}
 			}
