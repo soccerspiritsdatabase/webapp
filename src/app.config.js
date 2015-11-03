@@ -1,6 +1,6 @@
 angular.module('app')
 .config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
-  //$compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(false);
   
   $urlRouterProvider.otherwise('/characters');
   
