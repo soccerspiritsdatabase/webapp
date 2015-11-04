@@ -39,12 +39,10 @@ angular.module('app')
 				for (var i = 0; i < scope.character.value; i++) {
 					scope.stars.push(i);
 				}
-				
-				$timeout(calculateFontSize, 10);
 			}
 		
+			scope.calculateFontSize = calculateFontSize;
 			function calculateFontSize (event) {
-				console.log('calculate font size');
 				scope.fontSize = Math.min(25, (element[0].clientWidth / 10)) + 'px';
 				if (event) {
 					scope.$apply();	
