@@ -2,7 +2,7 @@ angular.module('app')
 .service('Characters', function ($http, $q, Skills) {
 	var service = this;
 	
-	var charactersById, characters, evolvedPlayers;
+	var charactersById, characters, rankedPlayers;
 	
 	var promise = $http.get('data/json_files/characters.json')
 	.success(function (data) {
@@ -23,8 +23,8 @@ angular.module('app')
 			return 0;
 		});
 		
-		evolvedPlayers = characters.filter(function (character) {
-			return character.isPlayer && !character.evolution;
+		rankedPlayers = characters.filter(function (character) {
+			return character.power.ranking;
 		});
 	});
 	
@@ -167,12 +167,12 @@ angular.module('app')
 	
 	service.getRanking = function (stat) {
 		return promise.then(function () {
-			return evolvedPlayers.sort(function (a, b) {
-				if (a[stat].max > b[stat].max) return -1;
-				if (a[stat].max < b[stat].max) return 1;
+			return rankedPlayers.slice().sort(function (a, b) {
+				if (a[stat].ranking < b[stat].ranking) return -1;
+				if (a[stat].ranking > b[stat].ranking) return 1;
 				return 0;
 			});
-		})
+		});
 	};
 	
 });

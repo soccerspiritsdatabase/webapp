@@ -32,7 +32,8 @@
 	
 	<div ng-repeat="(key, stat) in stats">
 		<div class="stat-meta">
-			<span class="ui small {{stat.color}} basic label">{{stat.name}}: {{stat.value}}</span>
+			<span class="ui small {{stat.color}} label">{{stat.name}}: {{stat.value}}</span>
+			<span ng-show="character[key].ranking" class="ui small {{stat.color}} basic label">Rank: {{character[key].ranking}}</span>
 			<div class="ui mini labeled input">
 				<div class="ui {{stat.color}} left corner label">
 					<i class="plus icon"></i>

@@ -1,41 +1,27 @@
-<table class="ui celled definition table">
-	<thead>
-		<tr>
-			<th></th>
-			<th>Power</th>
-			<th>Technique</th>
-			<th>Vitality</th>
-			<th>Speed</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>1</td>
-			<td><a href="#">William</a></td>
-			<td><a href="#">Metatron</a></td>
-			<td><a href="#">King Jin</a></td>
-			<td><a href="#">Milky Way</a></td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td><a href="#">Leventor</a></td>
-			<td><a href="#">Baltheon</a></td>
-			<td><a href="#">Issilia</a></td>
-			<td><a href="#">Vonchi</a></td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td><a href="#">Sharr</a></td>
-			<td><a href="#">Nari</a></td>
-			<td><a href="#">Zibroi</a></td>
-			<td><a href="#">Black Tortoise</a></td>
-		</tr>
-		<tr>
-			<td>4</td>
-			<td><a href="#">Beatrice</a></td>
-			<td><a href="#">Nerazel</a></td>
-			<td><a href="#">Raklet</a></td>
-			<td><a href="#">Serestia</a></td>
-		</tr>
-	</tbody>
-</table>
+<h5 class="ui header">
+	Show Top {{ctrl.limit}} Players
+	<a ng-repeat="limit in ctrl.limits" class="ui label"
+		ng-class="{ 'violet': limit === ctrl.limit }"
+		ng-click="ctrl.limit = limit">
+		{{limit}}
+	</a>
+</h5>
+
+<div class="ui stackable doubling four column grid">
+	<div ng-repeat="stat in ctrl.stats" class="column">
+		<table class="ui unstackable table">
+			<thead>
+				<tr>
+					<th colspan="3">{{ctrl.statNames[stat]}} Ranking</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="character in ctrl.ranking[stat]" ng-show="$index < ctrl.limit">
+					<td>{{character[stat].ranking}}</td>
+					<td><a ui-sref="character-details({characterId: character.id})">{{character.name.en}}</a></td>
+					<td>{{character[stat].max}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
