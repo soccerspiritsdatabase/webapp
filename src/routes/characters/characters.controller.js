@@ -124,7 +124,7 @@ angular.module('app')
   $scope.$watch(function () {
     return ctrl.filterValues;
   }, function (filter) {
-    $localStorage.characterFilterValues = ctrl.filterValues;
+    $localStorage.characterFilterValues = filter;
     
     Characters.getAll(filter).then(function (characters) {
       var maxLimit = ctrl.pageLimits[ctrl.pageLimits.length - 1];
