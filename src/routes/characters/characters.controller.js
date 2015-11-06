@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('CharactersController', function ($scope, $localStorage, Characters, ImageIcons) {
+.controller('CharactersController', function ($scope, $timeout, $localStorage, Cache, Characters, ImageIcons) {
   var ctrl = this;
   
   ctrl.filterValues = $localStorage.characterFilterValues;
@@ -131,4 +131,16 @@ angular.module('app')
       ctrl.characters = characters.slice(0, maxLimit);
     });
   }, true);
+
+  // remembers previous scroll position  
+  $scope.$on('$stateChangeSuccess', function () {
+    var scrollTop = Cache.get('charactersState:scrollTop') || 0;
+    $timeout(function () {
+      document.documentElement.scrollTop = document.body.scrollTop = scrollTop;
+    }, 0);
+  });
+  $scope.$on('$stateChangeStart', function () {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+    Cache.put('charactersState:scrollTop', scrollTop);
+  });
 });

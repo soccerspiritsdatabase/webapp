@@ -49,4 +49,9 @@ angular.module('app')
     ctrl.selectedTab = {};
     ctrl.selectedTab[Object.keys(ctrl.tabs).shift()] = true;
   });
+  
+  // scroll to top
+  $scope.$on('$stateChangeSuccess', function () {
+    document.documentElement.scrollTop = document.body.scrollTop = 0;
+  });
 });
