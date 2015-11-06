@@ -43,7 +43,7 @@ angular.module('app')
 				return false;
 			};
 			
-			if (scope.required) {
+			if (scope.model === undefined && scope.required) {
 				scope.selectOption(scope.options[0]);
 			}
 		}
