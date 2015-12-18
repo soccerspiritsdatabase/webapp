@@ -1,5 +1,5 @@
 angular.module('app')
-.service('Characters', function ($http, $q, Skills) {
+.service('Characters', function ($http, $q, Skills, Calculator) {
 	var service = this;
 	
 	var charactersById, characters, rankedPlayers;
@@ -7,6 +7,23 @@ angular.module('app')
 	var promise = $http.get('data/json_files/characters.json')
 	.success(function (data) {
 		charactersById = data;
+    
+    Object.keys(charactersById).forEach(function (id) {
+      var primaryStats = {};
+      ['power', 'technique', 'vitality', 'speed'].map(function (statName) {
+        primaryStats[statName] = Calculator.calcPrimaryStat(charactersById[id], statName, 60, 5, 40);
+      });
+      var secondaryStats = Calculator.calcSecondaryStats(
+        primaryStats.power,
+        primaryStats.technique,
+        primaryStats.vitality,
+        primaryStats.speed,
+        60
+      );
+      charactersById[id].primaryStats = primaryStats;
+      charactersById[id].secondaryStats = secondaryStats;
+    });
+    
 		characters = Object.keys(charactersById).map(function (key) {
 			return charactersById[key];
 		})

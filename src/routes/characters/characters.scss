@@ -1,0 +1,16 @@
+#characters {
+  .scrollable.table {
+    overflow: auto;
+  }
+  
+  .ui.table {
+    td:first-child {
+      white-space: nowrap;
+      
+      img.ui.image {
+        display: inline-block;
+        width: 24px;
+      }
+    }
+  }
+}

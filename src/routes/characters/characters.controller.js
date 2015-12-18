@@ -120,6 +120,12 @@ angular.module('app')
   
   ctrl.pageLimits = [20, 40, 60];
   ctrl.pageLimit = ctrl.pageLimits[0];
+  ctrl.layouts = ['grid', 'list'];
+  ctrl.layout = ctrl.layouts[0];
+  
+  ctrl.getImageIcon = function (type, name) {
+    return ImageIcons.get(type, name);
+  };
   
   $scope.$watch(function () {
     return ctrl.filterValues;
