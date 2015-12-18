@@ -4,8 +4,17 @@
   }
   
   .ui.table {
-    td:first-child {
+    td, th {
+      text-align: center;
       white-space: nowrap;
+      
+      &:first-child {
+        text-align: left;
+      }
+      
+      a {
+        cursor: pointer;
+      }
       
       img.ui.image {
         display: inline-block;

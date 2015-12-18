@@ -80,37 +80,30 @@
       Stats are calculated at
       <span class="ui label">level 60</span>
       <span class="ui label">5 superb</span>
-      <span class="ui label">+0 bonus stats</span>
+      <span class="ui label">+40 bonus stats</span>
     </h5>
     <div class="scrollable table">
-      <table class="ui table">
+      <table class="ui unstackable table">
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
+            <th><a ng-click="ctrl.sortBy = 'name'">Name <i class="long arrow down icon" ng-show="ctrl.sortBy === 'name'"></i></a></th>
       
-            <th ng-click="ctrl.sortBy('power')">Pow</th>
-            <th ng-click="ctrl.sortBy('technique')">Tech</th>
-            <th ng-click="ctrl.sortBy('vitality')">Vit</th>
-            <th ng-click="ctrl.sortBy('speed')">Spd</th>
+            <th><a ng-click="ctrl.sortBy = 'power'">Pow <i class="long arrow down icon" ng-show="ctrl.sortBy === 'power'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'technique'">Tech <i class="long arrow down icon" ng-show="ctrl.sortBy === 'technique'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'vitality'">Vit <i class="long arrow down icon" ng-show="ctrl.sortBy === 'vitality'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'speed'">Spd <i class="long arrow down icon" ng-show="ctrl.sortBy === 'speed'"></i></a></th>
       
-            <th ng-click="ctrl.sortBy('dribble')">Drb</th>
-            <th ng-click="ctrl.sortBy('defense')">Def</th>
-            <th ng-click="ctrl.sortBy('steal')">Stl</th>
-            <th ng-click="ctrl.sortBy('hp')">HP</th>
-            <th ng-click="ctrl.sortBy('pass')">Pass</th>
-            <th ng-click="ctrl.sortBy('reflex')">Rflx</th>
-            <th ng-click="ctrl.sortBy('actionSpeed')">ActSpd</th>
+            <th><a ng-click="ctrl.sortBy = 'dribble'">Drb <i class="long arrow down icon" ng-show="ctrl.sortBy === 'dribble'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'defense'">Def <i class="long arrow down icon" ng-show="ctrl.sortBy === 'defense'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'steal'">Stl <i class="long arrow down icon" ng-show="ctrl.sortBy === 'steal'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'hp'">HP <i class="long arrow down icon" ng-show="ctrl.sortBy === 'hp'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'pass'">Pass <i class="long arrow down icon" ng-show="ctrl.sortBy === 'pass'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'reflex'">Rflx <i class="long arrow down icon" ng-show="ctrl.sortBy === 'reflex'"></i></a></th>
+            <th><a ng-click="ctrl.sortBy = 'actionSpeed'">ActSpd <i class="long arrow down icon" ng-show="ctrl.sortBy === 'actionSpeed'"></i></a></th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimit">
-            <td>
-              <img class="ui mini image" ng-src="{{ctrl.getImageIcon('element', character.element)}}">
-              <img class="ui mini image" ng-src="{{ctrl.getImageIcon('type', character.type)}}">
-              <img class="ui mini image" ng-src="{{ctrl.getImageIcon('gender', character.gender)}}">
-              <img class="ui mini image" ng-src="{{ctrl.getImageIcon('weather', character.weatherImmunity)}}">
-            </td>
             <td>
               <a ui-sref="character-details({ characterId: character.id })">{{character.name.en}}</a>
             </td>
@@ -126,8 +119,6 @@
             <td>{{character.secondaryStats.pass.value}}</td>
             <td>{{character.secondaryStats.reflex.value}}</td>
             <td>{{character.secondaryStats.actionSpeed.value}}</td>
-            <td>{{character.secondaryStats.recovery.value}}</td>
-            <td>{{character.secondaryStats.critical.value}}</td>
           </tr>
         </tbody>
       </table>

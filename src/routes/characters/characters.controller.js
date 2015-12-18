@@ -128,15 +128,27 @@ angular.module('app')
   };
   
   $scope.$watch(function () {
+    return ctrl.sortBy;
+  }, getCharacters);
+  
+  $scope.$watch(function () {
+    return ctrl.layout;
+  }, function () {
+    delete ctrl.sortBy;
+  })
+  
+  $scope.$watch(function () {
     return ctrl.filterValues;
-  }, function (filter) {
-    $localStorage.characterFilterValues = filter;
+  }, getCharacters, true);
+  
+  function getCharacters () {
+    $localStorage.characterFilterValues = ctrl.filterValues;
     
-    Characters.getAll(filter).then(function (characters) {
+    Characters.getAll(ctrl.filterValues, ctrl.sortBy).then(function (characters) {
       var maxLimit = ctrl.pageLimits[ctrl.pageLimits.length - 1];
       ctrl.characters = characters.slice(0, maxLimit);
     });
-  }, true);
+  }
 
   // remembers previous scroll position  
   $scope.$on('$stateChangeSuccess', function () {

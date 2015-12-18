@@ -51,7 +51,7 @@ angular.module('app')
 		});
 	};
 	
-	service.getAll = function (filter) {
+	service.getAll = function (filter, sortBy) {
 		var filters = [];
 	
 		if (filter.name) {
@@ -178,6 +178,24 @@ angular.module('app')
 			result = filters.reduce(function (prev, filterFn) {
 				return prev.filter(filterFn);
 			}, characters);
+      
+      if (sortBy && sortBy !== 'name') {
+        console.log(sortBy);
+        if (['power', 'technique', 'vitality', 'speed'].indexOf(sortBy) !== -1) {
+          result = result.sort(function (a, b) {
+            if (a.primaryStats[sortBy] > b.primaryStats[sortBy]) return -1;
+            if (a.primaryStats[sortBy] < b.primaryStats[sortBy]) return 1;
+            return 0;
+          }); 
+        }            
+        if (['dribble', 'defense', 'steal', 'hp', 'pass', 'reflex', 'actionSpeed'].indexOf(sortBy) !== -1) {
+          result = result.sort(function (a, b) {
+            if (a.secondaryStats[sortBy].value > b.secondaryStats[sortBy].value) return -1;
+            if (a.secondaryStats[sortBy].value < b.secondaryStats[sortBy].value) return 1;
+            return 0;
+          }); 
+        }
+      }
 			return result;
 		});
 	};
