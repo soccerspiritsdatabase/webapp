@@ -1,14 +1,13 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
-var minifyCss = require('gulp-minify-css');
-var minifyHtml = require('gulp-minify-html');
+var cssnano = require('gulp-cssnano');
+var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var templateCache = require('gulp-angular-templatecache');
-var zip = require('gulp-zip');
 
 var paths = {
 	src: './src',
@@ -29,7 +28,7 @@ paths.static = [
 
 gulp.task('templates', function () {
   gulp.src(paths.templates)
-    .pipe(minifyHtml({ quotes: true }))
+    .pipe(htmlmin({ quotes: true }))
     .pipe(templateCache('tpls.min.js', { standalone: true }))
     .pipe(uglify())
     .pipe(gulp.dest(paths.dest))
@@ -50,7 +49,7 @@ gulp.task('sass', function () {
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(concat('bundle.min.css'))
-		.pipe(minifyCss())
+		.pipe(cssnano())
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(paths.dest));
 });
