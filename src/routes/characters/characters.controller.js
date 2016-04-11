@@ -80,7 +80,8 @@ angular.module('app')
       { value: 'Attacker', image: ImageIcons.get('type', 'attacker') },
       { value: 'Defender', image: ImageIcons.get('type', 'defender') },
       { value: 'Assist', image: ImageIcons.get('type', 'assist') },
-      { value: 'Leader', image: ImageIcons.get('type', 'leader') }
+      { value: 'Leader', image: ImageIcons.get('type', 'leader') },
+      { value: 'Goal Keeper', image: ImageIcons.get('type', 'goal keeper') }
     ],
     multiple: true
   };
