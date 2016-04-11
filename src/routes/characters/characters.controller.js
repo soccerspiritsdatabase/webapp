@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('CharactersController', function ($scope, $timeout, $localStorage, Cache, Characters, ImageIcons) {
+.controller('CharactersController', function ($scope, $timeout, $interval, $localStorage, Cache, Characters, ImageIcons) {
   var ctrl = this;
   
   ctrl.filterValues = $localStorage.characterFilterValues;
@@ -119,8 +119,26 @@ angular.module('app')
     passive: { name: 'Passive Skill' }
   };
   
-  ctrl.pageLimits = [20, 40, 60];
+  var pageLimitInterval = null;
+  ctrl.pageLimits = [20, 40, 60, 'All'];
   ctrl.pageLimit = ctrl.pageLimits[0];
+  ctrl.setPageLimit = function (limit) {
+    ctrl.pageLimit = limit;
+    if (pageLimitInterval) {
+      $interval.cancel(pageLimitInterval);
+    }
+    
+    if (limit <= 60) {
+      ctrl.pageLimitActual = limit; 
+    } else {
+      ctrl.pageLimitActual = 60;
+      var count = Math.ceil((limit - ctrl.pageLimitActual) / 5);
+      pageLimitInterval = $interval(function () {
+        ctrl.pageLimitActual += 5;
+      }, 100, count);
+    }
+  };
+  
   ctrl.layouts = ['grid', 'list'];
   ctrl.layout = ctrl.layouts[0];
   
@@ -146,8 +164,7 @@ angular.module('app')
     $localStorage.characterFilterValues = ctrl.filterValues;
     
     Characters.getAll(ctrl.filterValues, ctrl.sortBy).then(function (characters) {
-      var maxLimit = ctrl.pageLimits[ctrl.pageLimits.length - 1];
-      ctrl.characters = characters.slice(0, maxLimit);
+      ctrl.characters = characters;
     });
   }
 

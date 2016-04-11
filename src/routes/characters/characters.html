@@ -51,7 +51,7 @@
       <span class="ui right pointing label">Limit results to:</span>
       <div class="ui mini buttons">
         <button ng-repeat="limit in ctrl.pageLimits"
-          ng-click="ctrl.pageLimit = limit"
+          ng-click="ctrl.setPageLimit(limit)"
           class="ui teal button" ng-class="{ basic: ctrl.pageLimit != limit }">{{limit}}</button>
       </div>
       &nbsp;
@@ -68,7 +68,7 @@
   
   <div class="ui five column doubling grid"
     ng-show="ctrl.layout == 'grid'">
-    <div ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimit" class="column">
+    <div ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimitActual" class="column">
       <a ui-sref="character-details({ characterId: character.id })">
         <character-card ng-model="character" class="ui link"></character-card>
       </a>
@@ -103,7 +103,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimit">
+          <tr ng-repeat="character in ctrl.characters | limitTo: ctrl.pageLimitActual">
             <td>
               <a ui-sref="character-details({ characterId: character.id })">{{character.name.en}}</a>
             </td>
