@@ -121,7 +121,7 @@ angular.module('app')
   
   var pageLimitInterval = null;
   ctrl.pageLimits = [20, 40, 60, 'All'];
-  ctrl.pageLimit = ctrl.pageLimits[0];
+  ctrl.pageLimit = ctrl.pageLimitActual = ctrl.pageLimits[0];
   ctrl.setPageLimit = function (limit) {
     ctrl.pageLimit = limit;
     if (pageLimitInterval) {
